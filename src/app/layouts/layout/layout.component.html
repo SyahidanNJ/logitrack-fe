@@ -1,0 +1,15 @@
+<div class="d-flex" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <app-sidebar *ngIf="!isPrintMode" class="bg-dark text-white p-3 d-print-none" style="width: 250px;"></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex-grow-1 bg-light d-flex flex-column print-bg-white" [class.bg-white]="isPrintMode">
+    <!-- Topbar -->
+    <app-topbar *ngIf="!isPrintMode" class="d-print-none"></app-topbar>
+    
+    <!-- Page Content -->
+    <div class="flex-grow-1" [ngClass]="isPrintMode ? 'p-0' : 'p-4 p-print-0'">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

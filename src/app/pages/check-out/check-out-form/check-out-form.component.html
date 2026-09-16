@@ -1,0 +1,41 @@
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Product</label>
+        <select class="form-select" formControlName="product_id">
+          <option value="">-- Select Product --</option>
+          <option *ngFor="let p of products" [value]="p.id">{{ p.sku }} - {{ p.name }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Quantity to Dispatch</label>
+        <input type="number" class="form-control" formControlName="quantity">
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Strategy</label>
+        <select class="form-select" formControlName="strategy">
+          <option value="FIFO">FIFO (First In First Out)</option>
+          <option value="FEFO">FEFO (First Expired First Out)</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Destination</label>
+        <input type="text" class="form-control" formControlName="destination">
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Document Number (DO/SO)</label>
+        <input type="text" class="form-control" formControlName="document_number">
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Upload Document (Optional)</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept=".pdf,.png,.jpg,.jpeg">
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Notes</label>
+        <input type="text" class="form-control" formControlName="notes">
+      </div>
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">Submit</button>
+      </div>
+    </form>

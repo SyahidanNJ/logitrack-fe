@@ -1,0 +1,20 @@
+.custom-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  border-color: #dee2e6;
+}
+
+.dropdown-item {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}

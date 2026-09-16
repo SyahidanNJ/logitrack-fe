@@ -1,0 +1,36 @@
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Warehouse Code <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" formControlName="code" 
+               [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" placeholder="e.g. WH-JKT-01">
+        <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
+          <div *ngIf="f['code'].errors['required']">Code is required</div>
+          <div *ngIf="f['code'].errors['maxlength']">Max 20 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Warehouse Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" formControlName="name" 
+               [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="e.g. Main Hub Jakarta">
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+          <div *ngIf="f['name'].errors['required']">Name is required</div>
+          <div *ngIf="f['name'].errors['maxlength']">Max 100 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Address</label>
+        <textarea class="form-control" formControlName="address" rows="3" placeholder="Full address details..."></textarea>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          {{ isEdit ? 'Update' : 'Save' }}
+        </button>
+      </div>
+
+    </form>

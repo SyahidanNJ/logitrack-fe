@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label fw-semibold">Document Type</label>
+      <select class="form-select" formControlName="doc_type">
+        <option value="">-- Select Type --</option>
+        <option value="CHECK_IN">Goods Receipt (Check-In)</option>
+        <option value="CHECK_OUT">Delivery Order (Check-Out)</option>
+      </select>
+    </div>
+    
+    <div class="col-md-6 mb-3" *ngIf="form.get('doc_type')?.value">
+      <label class="form-label fw-semibold">Select Transaction</label>
+      <select class="form-select" formControlName="reference_id">
+        <option value="">-- Select Transaction --</option>
+        <option *ngFor="let t of transactions" [value]="t.id">
+          {{ form.get('doc_type')?.value === 'CHECK_IN' ? 
+             ('Check-In #' + t.id + ' | Batch: ' + t.batch_number + ' | Qty: ' + t.quantity) : 
+             ('Check-Out #' + t.id + ' | Dest: ' + (t.destination || 'N/A') + ' | Qty: ' + t.quantity) }}
+        </option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-end gap-2 mt-3">
+    <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="loading || form.invalid">
+      <i class="bi bi-file-earmark-check me-1"></i> Generate
+    </button>
+  </div>
+</form>

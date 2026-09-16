@@ -1,0 +1,129 @@
+.login-wrapper {
+  background: linear-gradient(135deg, #abb2b9 0%, #808b96 100%); /* Medium slate gray */
+}
+
+/* Background floating shapes */
+.bg-shape {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -50px;
+  border-radius: 50%;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  right: -100px;
+  border-radius: 30px;
+  transform: rotate(45deg);
+}
+
+.shape-3 {
+  width: 150px;
+  height: 150px;
+  bottom: 5%;
+  left: 20%;
+  border-radius: 20px;
+  transform: rotate(15deg);
+}
+
+.login-container {
+  width: 800px;
+  height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-left {
+  flex: 1.1;
+  background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop') center/cover;
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(33, 37, 41, 0.9) 0%, rgba(18, 20, 22, 0.95) 100%);
+}
+
+.logo-img {
+  width: 50px;
+  height: auto;
+}
+
+.tracking-wider {
+  letter-spacing: 1px;
+}
+
+.brand-divider {
+  width: 60px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-indicators-custom {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  
+  span {
+    width: 25px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: inline-block;
+    
+    &.active {
+      background-color: #fff;
+    }
+  }
+}
+
+.login-right {
+  flex: 1;
+  max-width: 380px;
+}
+
+.custom-input {
+  background-color: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  
+  &:focus {
+    background-color: #fff;
+    border-color: #adb5bd;
+    box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.15);
+  }
+}
+
+.input-group-text.custom-input {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: #6c757d;
+  &:hover {
+    color: #333;
+  }
+}
+
+.custom-btn {
+  background-color: #212529;
+  border-color: #212529;
+  padding: 0.65rem 1rem;
+  
+  &:hover {
+    background-color: #343a40;
+    border-color: #343a40;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

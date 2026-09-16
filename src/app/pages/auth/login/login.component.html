@@ -1,0 +1,78 @@
+<div class="login-wrapper position-relative overflow-hidden vh-100 d-flex justify-content-center align-items-center">
+  <!-- Decorative background elements -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <div class="login-container d-flex shadow-lg position-relative z-1">
+    <!-- Left Side -->
+    <div class="login-left d-none d-md-flex flex-column justify-content-center position-relative overflow-hidden text-center text-white p-5">
+      <div class="bg-overlay"></div>
+      <div class="content position-relative z-1 w-100">
+        <div class="brand-logo mb-4">
+          <img src="favicon.png" alt="Logo" class="logo-img mb-2">
+          <h2 class="fw-bold mb-0 text-white tracking-wider">LogiTrack</h2>
+          <div class="brand-divider mx-auto mt-2 mb-2"></div>
+          <p class="small text-uppercase tracking-wider opacity-75">- Warehouse System -</p>
+        </div>
+
+        <div class="quote-section mt-4 px-2">
+          <i class="bi bi-quote fs-1 text-white opacity-50 d-block text-start mb-n3"></i>
+          <p class="fst-italic lh-base small mb-4 mt-n2 px-3">
+            "Streamlining your warehouse operations with real-time tracking, efficient inventory management, and seamless logistics coordination."
+          </p>
+          <div class="carousel-indicators-custom">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="login-right p-5 d-flex flex-column justify-content-center bg-white">
+      <div class="mb-4 mt-2">
+        <h5 class="fw-bold text-dark mb-2">Welcome Back !</h5>
+        <p class="text-muted small">Sign in to continue to LogiTrack Application.</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="nik" class="form-label small fw-semibold text-dark">NIK</label>
+          <input type="text" class="form-control custom-input" id="nik" formControlName="nik" 
+                 [ngClass]="{ 'is-invalid': submitted && f['nik'].errors }" 
+                 placeholder="Enter NIK">
+          <div *ngIf="submitted && f['nik'].errors" class="invalid-feedback">
+            <div *ngIf="f['nik'].errors['required']">NIK is required</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label small fw-semibold text-dark">Password</label>
+          <div class="input-group">
+            <input [type]="isPasswordVisible ? 'text' : 'password'" class="form-control custom-input border-end-0" id="password" formControlName="password"
+                   [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" 
+                   placeholder="Enter password">
+            <span class="input-group-text custom-input bg-transparent border-start-0 cursor-pointer" 
+                  (click)="togglePasswordVisibility()"
+                  [ngClass]="{ 'border-danger': submitted && f['password'].errors }">
+              <i class="bi" [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </span>
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback d-block">
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary custom-btn w-100 fw-semibold shadow-sm mt-2" [disabled]="loginForm.invalid">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="login-footer position-absolute bottom-0 w-100 text-center mb-3 text-muted small z-1">
+    &copy; 2026 LogiTrack Center
+  </div>
+</div>

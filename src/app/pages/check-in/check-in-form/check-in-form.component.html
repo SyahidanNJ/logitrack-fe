@@ -1,0 +1,30 @@
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Product</label>
+        <select class="form-select" formControlName="product_id">
+          <option value="">-- Select Product --</option>
+          <option *ngFor="let p of products" [value]="p.id">{{ p.sku }} - {{ p.name }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Bin Location</label>
+        <select class="form-select" formControlName="bin_location_id">
+          <option value="">-- Select Bin --</option>
+          <option *ngFor="let b of binLocations" [value]="b.id">{{ b.code }} (Zone: {{ b.zone_id }})</option>
+        </select>
+      </div>
+      <div class="mb-3"><label class="form-label fw-semibold">Batch Number</label><input type="text" class="form-control" formControlName="batch_number"></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Quantity</label><input type="number" class="form-control" formControlName="quantity"></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Expiry Date</label><input type="date" class="form-control" formControlName="expiry_date"></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Document Number (DO/PO)</label><input type="text" class="form-control" formControlName="document_number"></div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Upload Document (Optional)</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept=".pdf,.png,.jpg,.jpeg">
+      </div>
+      <div class="mb-3"><label class="form-label fw-semibold">Notes</label><input type="text" class="form-control" formControlName="notes"></div>
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">Submit</button>
+      </div>
+    </form>

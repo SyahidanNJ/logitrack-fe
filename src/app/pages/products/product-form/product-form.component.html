@@ -1,0 +1,29 @@
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      <div class="mb-3"><label class="form-label fw-semibold">SKU</label><input type="text" class="form-control" formControlName="sku"></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Name</label><input type="text" class="form-control" formControlName="name"></div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Category</label>
+        <select class="form-select" formControlName="category">
+          <option value="">-- Select Category --</option>
+          <option value="F&B (Makanan & Minuman)">F&B (Makanan & Minuman)</option>
+          <option value="Fashion & Tekstil">Fashion & Tekstil</option>
+          <option value="Stationery & Cetakan">Stationery & Cetakan</option>
+          <option value="Elektronik & Gadget">Elektronik & Gadget</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Unit</label>
+        <select class="form-select" formControlName="unit">
+          <option value="pcs">Pcs</option>
+          <option value="kg">Kg</option>
+          <option value="liter">Liter</option>
+          <option value="box">Box</option>
+          <option value="pallet">Pallet</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">{{ isEdit ? 'Update' : 'Save' }}</button>
+      </div>
+    </form>

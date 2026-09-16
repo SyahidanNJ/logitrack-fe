@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm px-4">
+  <div class="container-fluid">
+    <span class="navbar-brand text-muted fw-medium" 
+          [style.opacity]="fadeMotto ? 0 : 1"
+          style="font-size: 1.05rem; letter-spacing: 0.5px; transition: opacity 0.5s ease-in-out;">
+      {{ currentMotto }}
+    </span>
+    
+    <div class="d-flex align-items-center ms-auto">
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle me-1"></i> {{ user?.name || 'User' }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

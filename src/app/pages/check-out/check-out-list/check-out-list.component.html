@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold m-0">Check-Out Records</h4>
+  <button class="btn btn-primary" (click)="openModal(null)">
+    <i class="bi bi-plus-lg me-1"></i> New Check-Out
+  </button>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <div *ngIf="loading" class="text-center py-4">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <div class="table-responsive" *ngIf="!loading">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Strategy</th>
+            <th>Destination</th>
+            <th class="text-end" style="width: 120px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td><span class="badge bg-secondary">#{{ item.id }}</span></td>
+            <td>{{ item.createdAt | date:'dd MMM yyyy' }}</td>
+            <td>
+              <span class="fw-semibold">{{ item.Product?.name || 'Product ' + item.product_id }}</span>
+              <br><small class="text-muted">ID: P-{{ item.product_id }}</small>
+            </td>
+            <td><span class="fw-bold text-danger">-{{ item.quantity }}</span></td>
+            <td><span class="badge bg-primary">{{ item.strategy }}</span></td>
+            <td>{{ item.destination || '-' }}</td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="openModal(item.id)"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteItem(item.id)"><i class="bi bi-trash"></i></button>
+            </td>
+          </tr>
+          <tr *ngIf="items.length === 0"><td colspan="10" class="text-center text-muted py-4">No records found.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Check Out Form Modal -->
+<div class="modal fade" id="check-outModal" tabindex="-1" aria-labelledby="check-outModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold" id="check-outModalLabel">{{ selectedId ? 'Edit Check Out' : 'Add New Check Out' }}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <app-check-out-form 
+          [itemId]="selectedId" 
+          (saved)="onSaved()" 
+          (cancel)="closeModal()">
+        </app-check-out-form>
+      </div>
+    </div>
+  </div>
+</div>

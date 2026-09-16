@@ -1,0 +1,77 @@
+<div class="p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold m-0">Documents</h3>
+    <button class="btn btn-primary shadow-sm" (click)="showForm = true" *ngIf="!showForm">
+      <i class="bi bi-plus-lg me-1"></i> Generate Document
+    </button>
+  </div>
+
+  <div *ngIf="showForm" class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-4">
+      <h5 class="fw-bold mb-4">Generate New Document</h5>
+      <app-document-form (saved)="fetchData(); showForm = false" (cancel)="showForm = false"></app-document-form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm border-0" *ngIf="!showForm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="ps-4">Document Number</th>
+              <th>Type</th>
+              <th>Reference Details</th>
+              <th>Generator</th>
+              <th>Date Generated</th>
+              <th class="text-end pe-4" style="width: 150px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of documents">
+              <td class="ps-4 fw-semibold text-primary">{{ item.doc_number }}</td>
+              <td>
+                <span class="badge" [ngClass]="item.doc_type === 'CHECK_IN' ? 'bg-success' : 'bg-info'">
+                  {{ item.doc_type === 'CHECK_IN' ? 'Check-In' : 'Check-Out' }}
+                </span>
+              </td>
+              <td>
+                <div *ngIf="item.doc_type === 'CHECK_IN' && item.CheckIn">
+                  <small class="text-muted d-block">Batch: {{ item.CheckIn.batch_number }}</small>
+                  <span class="fw-semibold">{{ item.CheckIn.Product?.name }} (Qty: {{ item.CheckIn.quantity }})</span>
+                </div>
+                <div *ngIf="item.doc_type === 'CHECK_OUT' && item.CheckOut">
+                  <small class="text-muted d-block">Dest: {{ item.CheckOut.destination || '-' }}</small>
+                  <span class="fw-semibold">{{ item.CheckOut.Product?.name }} (Qty: {{ item.CheckOut.quantity }})</span>
+                </div>
+              </td>
+              <td>{{ item.Generator?.name || 'Unknown' }}</td>
+              <td>{{ item.createdAt || item.created_at | date:'medium' }}</td>
+              <td class="text-end pe-4">
+                <button class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/documents/print', item.id]" target="_blank">
+                  <i class="bi bi-printer"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteDoc(item.id)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="documents.length === 0 && !loading">
+              <td colspan="6" class="text-center text-muted py-5">
+                <i class="bi bi-file-earmark-x fs-1 mb-2 d-block opacity-50"></i>
+                No documents found.
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td colspan="6" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

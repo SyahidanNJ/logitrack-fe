@@ -1,0 +1,26 @@
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Warehouse</label>
+        <select class="form-select" formControlName="warehouse_id">
+          <option value="">-- Select Warehouse --</option>
+          <option *ngFor="let w of warehouses" [value]="w.id">{{ w.code }} - {{ w.name }}</option>
+        </select>
+      </div>
+      <div class="mb-3"><label class="form-label fw-semibold">Zone Code</label><input type="text" class="form-control" formControlName="code" placeholder="e.g. Z-01"></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Name</label><input type="text" class="form-control" formControlName="name" placeholder="e.g. Dry Food Zone"></div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Type</label>
+        <select class="form-select" formControlName="type">
+          <option value="inbound">Inbound (Penerimaan)</option>
+          <option value="outbound">Outbound (Pengiriman)</option>
+          <option value="storage">Storage (Penyimpanan Utama)</option>
+          <option value="quarantine">Quarantine (Karantina)</option>
+          <option value="staging">Staging (Transit sementara)</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-light" (click)="cancel.emit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">{{ isEdit ? 'Update' : 'Save' }}</button>
+      </div>
+    </form>
